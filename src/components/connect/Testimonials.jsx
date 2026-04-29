@@ -1,6 +1,4 @@
-import React from "react";
-
-function Testimonials({ jsonData }) {
+export default function Testimonials({ jsonData }) {
   return (
     <section id="testimonials">
       <div className="text-container">
@@ -14,9 +12,9 @@ function Testimonials({ jsonData }) {
             <div className="flexslider">
               <ul className="slides">
                 {jsonData.testimonials &&
-                  jsonData.testimonials.map((item) => {
+                  jsonData.testimonials.map((item, i) => {
                     return (
-                      <li>
+                      <li key={i}>
                         <blockquote>
                           <p>{item.description}</p>
                           <cite>{item.name}</cite>
@@ -36,5 +34,3 @@ function Testimonials({ jsonData }) {
     </section>
   );
 }
-
-export default Testimonials;

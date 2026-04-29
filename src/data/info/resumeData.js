@@ -29,22 +29,22 @@ export const resumeData = {
   // TODO : add job type and website
   work: [
     {
-      companyName: "Daylight",
-      jobTitle: "Technical Consultant",
-      startDate: "February 2023",
+      companyName: "PetPlace",
+      jobTitle: "Senior Web Developer",
+      startDate: "September 2023",
       endDate: "Present",
     },
     {
       companyName: "EdX/2U Bootcamps",
       jobTitle: "Instructional Specialist",
-      startDate: "January 2023",
+      startDate: "June 2022",
       endDate: "Present",
     },
     {
-      companyName: "Level Bot Technology",
-      jobTitle: "Front End Developer",
-      startDate: "December 2022",
-      endDate: "February 2023",
+      companyName: "Daylight",
+      jobTitle: "Technical Consultant",
+      startDate: "February 2023",
+      endDate: "May 2023",
     },
     {
       companyName: "Nexalogy Inc",
@@ -71,7 +71,7 @@ export const resumeData = {
       endDate: "June 2020",
     },
     {
-      companyName: "UTM - Trilogy",
+      companyName: "Trilogy Education (UTM)",
       jobTitle: "Instructional Assistant",
       startDate: "May 2018",
       endDate: "November 2019",

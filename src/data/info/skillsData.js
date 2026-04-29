@@ -5,7 +5,7 @@ export const skillsData = {
     list: [
       {
         skillName: "JavaScript",
-        percentage: 85,
+        percentage: 90,
         knewSince: 2010,
       },
       {
