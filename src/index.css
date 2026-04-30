@@ -17,7 +17,7 @@ code {
 @tailwind utilities;
 
 #background {
-  background-image: url("./assets/bg-sunset.png");
+  background-image: url("/temp/bg-sunset.png");
 }
 
 .typewriter {

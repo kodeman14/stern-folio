@@ -9,7 +9,7 @@ export const skillsData = {
         knewSince: 2010,
       },
       {
-        skillName: "HTML/CSS/jQuery",
+        skillName: "HTML/CSS",
         percentage: 90,
         knewSince: 2010,
       },
@@ -30,7 +30,7 @@ export const skillsData = {
       },
       {
         skillName: "ReactJs",
-        percentage: 85,
+        percentage: 90,
         knewSince: 2017,
       },
       {
@@ -40,7 +40,7 @@ export const skillsData = {
       },
       {
         skillName: "Databases",
-        percentage: 75,
+        percentage: 80,
         knewSince: 2016,
       },
     ],
@@ -58,19 +58,19 @@ export const skillsData = {
       },
       {
         skillName: "Team Building",
-        percentage: 75,
-      },
-      {
-        skillName: "Communication",
         percentage: 90,
       },
       {
+        skillName: "Communication",
+        percentage: 95,
+      },
+      {
         skillName: "Problem Solving",
-        percentage: 85,
+        percentage: 90,
       },
       {
         skillName: "Critical Thinking",
-        percentage: 80,
+        percentage: 95,
       },
       {
         skillName: "Active listening",

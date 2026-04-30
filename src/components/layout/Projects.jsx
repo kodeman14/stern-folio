@@ -1,4 +1,9 @@
 function Projects({ jsonData }) {
+  // Filter out placeholder projects
+  const validProjects = jsonData.myworks?.filter(
+    (item) => item.name !== "New ideas!" && item.name !== "Your Project Here!"
+  ) || [];
+
   return (
     <section id="portfolio" className="py-16 md:py-24 bg-dark-950">
       <div className="max-w-6xl mx-auto px-4">
@@ -15,64 +20,61 @@ function Projects({ jsonData }) {
 
         {/* Projects Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {jsonData.myworks &&
-            jsonData.myworks.map((item, i) => {
-              // Skip placeholder projects
-              if (item.name === "New ideas!" || item.name === "Your Project Here!") {
-                return null;
-              }
-              return (
-                <div 
-                  key={i} 
-                  className="bg-dark-800 rounded-xl overflow-hidden border border-dark-700 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 group"
-                >
-                  {/* Project Image */}
-                  <div className="relative h-48 bg-dark-700 overflow-hidden">
-                    <img
-                      alt={item.name}
-                      src={item.imgUrl}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      {item.link && (
-                        <a
-                          href={item.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-cyan-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-cyan-600 transition-colors"
-                        >
-                          View Project
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                  
-                  {/* Project Info */}
-                  <div className="p-5">
-                    <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                      {item.name}
-                    </h3>
-                    <p className="text-dark-400 text-sm mb-3">
-                      {item.keyword}
-                    </p>
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                        Live Demo
-                      </a>
-                    )}
-                  </div>
+          {validProjects.map((item, i) => (
+            <div 
+              key={i} 
+              className="bg-dark-800 rounded-xl overflow-hidden border border-dark-700 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 group"
+            >
+              {/* Project Image */}
+              <div className="relative h-48 bg-dark-700 overflow-hidden">
+                <img
+                  alt={item.name}
+                  src={item.imgUrl}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `https://placehold.co/400x200/27272a/06b6d4?text=${encodeURIComponent(item.name)}`;
+                  }}
+                />
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  {item.link && (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-cyan-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-cyan-600 transition-colors"
+                    >
+                      View Project
+                    </a>
+                  )}
                 </div>
-              );
-            })}
+              </div>
+              
+              {/* Project Info */}
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                  {item.name}
+                </h3>
+                <p className="text-dark-400 text-sm mb-3">
+                  {item.keyword}
+                </p>
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Live Demo
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Call to Action */}

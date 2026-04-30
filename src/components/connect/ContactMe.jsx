@@ -18,7 +18,8 @@ export default function ContactMe({ jsonData }) {
     e.preventDefault();
     setSubmitted(true);
     // Open email client with pre-filled message
-    const mailtoLink = `mailto:${jsonData.details.emailAddress}?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    const subject = formData.subject ? formData.subject : "contacting you from your folio";
+    const mailtoLink = `mailto:${jsonData.details.emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
     window.location.href = mailtoLink;
   };
 

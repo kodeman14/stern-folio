@@ -3,19 +3,19 @@ export const resumeData = {
   education: [
     {
       uniName: "University of Waterloo",
-      studyType: "Bachelor's",
+      studyType: "Bachelor's Degree",
       programType: "Mathematics",
       finishDate: "August 2020",
     },
     {
       uniName: "University of Toronto",
-      studyType: "Certificate",
+      studyType: "Certificate/Diploma",
       programType: "Business Analysis",
       finishDate: "April 2018",
     },
     {
       uniName: "University of Toronto",
-      studyType: "Certificate",
+      studyType: "Certificate/Diploma",
       programType: "Project Management",
       finishDate: "December 2017",
     },
@@ -35,10 +35,16 @@ export const resumeData = {
       endDate: "Present",
     },
     {
-      companyName: "EdX/2U Bootcamps",
-      jobTitle: "Instructional Specialist",
-      startDate: "June 2022",
+      companyName: "Co.Lab",
+      jobTitle: "AI-Guided Mentor",
+      startDate: "September 2023",
       endDate: "Present",
+    },
+    {
+      companyName: "EdX/2U",
+      jobTitle: "Bootcamp Instructor",
+      startDate: "June 2022",
+      endDate: "December 2025",
     },
     {
       companyName: "Daylight",
@@ -54,24 +60,24 @@ export const resumeData = {
     },
     {
       companyName: "Accenture",
-      jobTitle: "Software Consultant",
+      jobTitle: "Senior Consultant",
       startDate: "September 2020",
       endDate: "March 2022",
     },
     {
-      companyName: "Pethealth Inc.",
+      companyName: "Pethealth Inc",
       jobTitle: "Frontend Developer",
       startDate: "October 2020",
       endDate: "November 2021",
     },
     {
       companyName: "Aquent Dev6",
-      jobTitle: "Software Consultant",
+      jobTitle: "Senior Consultant",
       startDate: "March 2019",
       endDate: "June 2020",
     },
     {
-      companyName: "Trilogy Education (UTM)",
+      companyName: "Trilogy Education",
       jobTitle: "Instructional Assistant",
       startDate: "May 2018",
       endDate: "November 2019",
@@ -83,7 +89,7 @@ export const resumeData = {
       endDate: "March 2019",
     },
     {
-      companyName: "CIBC Skunkworks",
+      companyName: "CIBC - Skunkworks",
       jobTitle: "Full Stack Developer",
       startDate: "May 2016",
       endDate: "March 2018",

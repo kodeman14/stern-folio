@@ -1,7 +1,44 @@
+import { useState, useEffect } from "react";
 import Socials from "../connect/Socials";
 import NavMenu from "./NavMenu";
 
+// Typewriter hook
+function useTypewriter(text, speed = 50, delay = 1000) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    let timeout;
+    if (isTyping) {
+      if (displayedText.length < text.length) {
+        timeout = setTimeout(() => {
+          setDisplayedText(text.slice(0, displayedText.length + 1));
+        }, speed);
+      } else {
+        // Pause after completing, then restart
+        timeout = setTimeout(() => setIsTyping(false), delay);
+      }
+    } else {
+      // Delete effect
+      if (displayedText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayedText(text.slice(0, displayedText.length - 1));
+        }, speed / 2);
+      } else {
+        // Restart typing
+        timeout = setTimeout(() => setIsTyping(true), delay);
+      }
+    }
+    return () => clearTimeout(timeout);
+  }, [displayedText, isTyping, text, speed, delay]);
+
+  return displayedText;
+}
+
 export default function Header({ jsonData, allSiteData }) {
+  const tagline = "Welcome to my portfolio!";
+  const typedTagline = useTypewriter(tagline, 80, 2000);
+
   return (
     <>
       <header id="header" className="relative min-h-[60vh] md:min-h-[70vh]">
@@ -9,7 +46,7 @@ export default function Header({ jsonData, allSiteData }) {
         <div
           id="background"
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url("./assets/bg-sunset.png")' }}
+          style={{ backgroundImage: 'url("/temp/bg-sunset.png")' }}
         />
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-black/60" />
@@ -28,8 +65,11 @@ export default function Header({ jsonData, allSiteData }) {
             <p className="text-lg md:text-xl text-cyan-400 font-semibold mb-2">
               {jsonData.headerJob}
             </p>
-            <p className="text-dark-300 text-sm md:text-base mb-6">
-              {jsonData.roleDescription}
+            {/* Typewriter tagline */}
+            <p className="text-dark-300 text-sm md:text-base mb-6 h-6">
+              <span className="border-r-2 border-cyan-400 animate-pulse">
+                {typedTagline}
+              </span>
             </p>
             <div className="w-20 h-1 bg-cyan-500 mx-auto mb-6" />
             <Socials socialMedia={jsonData.socialMedia} />
@@ -48,9 +88,3 @@ export default function Header({ jsonData, allSiteData }) {
     </>
   );
 }
-
-// <p className="scrolldown">
-// <a className="smoothscroll" href="#about">
-//   <i className="icon-down-circle"></i>
-// </a>
-// </p>
