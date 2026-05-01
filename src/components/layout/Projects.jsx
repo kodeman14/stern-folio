@@ -1,18 +1,26 @@
+import { useState } from "react";
+
 function Projects({ jsonData }) {
   // Filter out placeholder projects
   const validProjects = jsonData.myworks?.filter(
     (item) => item.name !== "New ideas!" && item.name !== "Your Project Here!"
   ) || [];
 
+  const [imageErrors, setImageErrors] = useState({});
+
+  const handleImageError = (id) => {
+    setImageErrors(prev => ({ ...prev, [id]: true }));
+  };
+
   return (
-    <section id="portfolio" className="py-16 md:py-24 bg-dark-950">
+    <section id="portfolio" className="py-16 md:py-24 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
             Projects
           </h2>
-          <p className="text-dark-400 text-lg mb-4">
+          <p className="text-zinc-400 text-lg mb-4">
             Some of my recent work
           </p>
           <div className="w-20 h-1 bg-cyan-500 mx-auto" />
@@ -23,21 +31,26 @@ function Projects({ jsonData }) {
           {validProjects.map((item, i) => (
             <div 
               key={i} 
-              className="bg-dark-800 rounded-xl overflow-hidden border border-dark-700 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 group"
+              className="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 group"
             >
               {/* Project Image */}
-              <div className="relative h-48 bg-dark-700 overflow-hidden">
-                <img
-                  alt={item.name}
-                  src={item.imgUrl}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = `https://placehold.co/400x200/27272a/06b6d4?text=${encodeURIComponent(item.name)}`;
-                  }}
-                />
+              <div className="relative h-48 bg-zinc-800 overflow-hidden">
+                {!imageErrors[item.id] ? (
+                  <img
+                    alt={item.name}
+                    src={item.imgUrl}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={() => handleImageError(item.id)}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-zinc-800">
+                    <span className="text-zinc-500 text-sm">Image unavailable</span>
+                  </div>
+                )}
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
                 {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   {item.link && (
                     <a
                       href={item.link}
@@ -56,7 +69,7 @@ function Projects({ jsonData }) {
                 <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors">
                   {item.name}
                 </h3>
-                <p className="text-dark-400 text-sm mb-3">
+                <p className="text-zinc-400 text-sm mb-3">
                   {item.keyword}
                 </p>
                 {item.link && (

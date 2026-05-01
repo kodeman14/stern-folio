@@ -3,7 +3,7 @@ export const projectData = {
     {
       id: 1,
       name: "Goosenstein",
-      keyword: "Goosenstein is a Q&A platform for students",
+      keyword: "Q&A platform for students",
       link: "https://github.com/kodeman14/Goosenstein",
       imgUrl: "/projects/goosenstein.png",
       specs: [400, 200],
@@ -42,7 +42,7 @@ export const projectData = {
     {
       id: 6,
       name: "PetPlace",
-      keyword: "PetPlace Pet Care Platform",
+      keyword: "Pet Care Platform",
       link: "https://www.petplace.com",
       imgUrl: "/projects/petplace.png",
       specs: [200, 200],

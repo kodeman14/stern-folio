@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Socials from "../connect/Socials";
 import NavMenu from "./NavMenu";
 
@@ -15,17 +15,14 @@ function useTypewriter(text, speed = 50, delay = 1000) {
           setDisplayedText(text.slice(0, displayedText.length + 1));
         }, speed);
       } else {
-        // Pause after completing, then restart
         timeout = setTimeout(() => setIsTyping(false), delay);
       }
     } else {
-      // Delete effect
       if (displayedText.length > 0) {
         timeout = setTimeout(() => {
           setDisplayedText(text.slice(0, displayedText.length - 1));
         }, speed / 2);
       } else {
-        // Restart typing
         timeout = setTimeout(() => setIsTyping(true), delay);
       }
     }
@@ -35,21 +32,47 @@ function useTypewriter(text, speed = 50, delay = 1000) {
   return displayedText;
 }
 
+// Parallax background hook
+function useParallax() {
+  const [offset, setOffset] = useState(0);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ref.current) {
+        const scrolled = window.scrollY;
+        setOffset(scrolled * 0.4);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return { ref, offset };
+}
+
 export default function Header({ jsonData, allSiteData }) {
   const tagline = "Welcome to my portfolio!";
   const typedTagline = useTypewriter(tagline, 80, 2000);
+  const { ref: parallaxRef, offset } = useParallax();
 
   return (
     <>
-      <header id="header" className="relative min-h-[60vh] md:min-h-[70vh]">
-        {/* Background Image */}
+      <header id="header" className="relative min-h-[70vh] md:min-h-[80vh] overflow-hidden">
+        {/* Parallax Background */}
         <div
-          id="background"
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url("/temp/bg-sunset.png")' }}
+          ref={parallaxRef}
+          className="absolute inset-0 w-full h-[120%]"
+          style={{
+            backgroundImage: 'url("/temp/bg-sunset.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            transform: `translateY(${offset}px)`,
+          }}
         />
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         
         {/* Navigation */}
         <section className="relative z-10">
@@ -57,21 +80,21 @@ export default function Header({ jsonData, allSiteData }) {
         </section>
         
         {/* Hero Content */}
-        <section className="relative z-10 flex flex-col items-center justify-center min-h-[50vh] md:min-h-[60vh] px-4 text-center">
+        <section className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] md:min-h-[70vh] px-4 text-center">
           <div className="max-w-3xl">
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-2">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-3 tracking-tight">
               {jsonData.name}
             </h1>
-            <p className="text-lg md:text-xl text-cyan-400 font-semibold mb-2">
+            <p className="text-lg md:text-xl text-cyan-400 font-medium mb-3">
               {jsonData.headerJob}
             </p>
             {/* Typewriter tagline */}
-            <p className="text-dark-300 text-sm md:text-base mb-6 h-6">
+            <p className="text-zinc-300 text-sm md:text-base mb-6 h-6">
               <span className="border-r-2 border-cyan-400 animate-pulse">
                 {typedTagline}
               </span>
             </p>
-            <div className="w-20 h-1 bg-cyan-500 mx-auto mb-6" />
+            <div className="w-24 h-1 bg-cyan-500 mx-auto mb-6 rounded-full" />
             <Socials socialMedia={jsonData.socialMedia} />
           </div>
         </section>
