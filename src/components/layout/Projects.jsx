@@ -1,4 +1,5 @@
 import { useState } from "react";
+// import { imageMap } from "../../../public/projects/";
 
 function Projects({ jsonData }) {
   // Filter out placeholder projects

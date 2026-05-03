@@ -65,7 +65,7 @@ export default function Header({ jsonData, allSiteData }) {
           ref={parallaxRef}
           className="absolute inset-0 w-full h-[120%]"
           style={{
-            backgroundImage: 'url("/temp/bg-sunset.png")',
+            backgroundImage: 'url("./temp/bg-sunset.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             transform: `translateY(${offset}px)`,

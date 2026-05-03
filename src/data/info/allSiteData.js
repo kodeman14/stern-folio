@@ -37,7 +37,7 @@ export const allSiteData = {
     notFound: {
       errType: "error404",
       message: "You've treaded down a path less travelled",
-      imgLink: "./assets/temp/error404.png",
+      imgLink: "./temp/error404.png",
     },
     server: {},
     others: {},
